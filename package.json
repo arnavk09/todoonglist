@@ -1,7 +1,7 @@
 {
   "name": "todoonglist",
   "version": "0.1.0",
-  "homepage": "https://arnavk09.github.io/todoonglist/",
+  "homepage": "https://arnavk09.github.io/todoonglist",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
