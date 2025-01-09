@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import AddToDo from "./components/AddTodo";
+import ToDoList from "./components/ToDoList";
+import styles from "./App.module.css";
 
 function App() {
+  const [todos, setToDos] = useState([]);
+
+  const addToDo = (text) => {
+    setToDos([...todos, { id: Date.now(), text, completed: false }]);
+  };
+
+  const toggleComplete = (id) => {
+    setToDos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const deleteToDo = (id) => {
+    setToDos(todos.filter((todo) => todo.id !== id));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className={styles.appContainer}>
+        <h1 className={styles.header}>🍆TODOOOONG-To Do List🍆</h1>
+        <AddToDo addToDo={addToDo} />
+        <ToDoList
+          todos={todos}
+          toggleComplete={toggleComplete}
+          deleteToDo={deleteToDo}
+        />
+      </div>
+      <div className={styles.footer}>
+        made with ♥️ by arnavk09
+      </div>
+    </>
   );
 }
 
