@@ -11,6 +11,8 @@ function App() {
   };
 
   const toggleComplete = (id) => {
+    const sound=new Audio('./sounds/tudoong.mp3');
+    sound.play();
     setToDos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
