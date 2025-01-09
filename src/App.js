@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <div className={styles.appContainer}>
-        <h1 className={styles.header}>🍆TODOOOONG-To Do List🍆</h1>
+        <h1 className={styles.header}>TODOOOONG-To Do List</h1>
         <AddToDo addToDo={addToDo} />
         <ToDoList
           todos={todos}
