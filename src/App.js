@@ -34,7 +34,7 @@ function App() {
         />
       </div>
       <div className={styles.footer}>
-        made with ♥️ by arnavk09
+        Made with ♥️ by arnavk09
       </div>
     </>
   );
