@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy, Audit, and QR
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  build-deploy-audit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -18,7 +18,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: yarn install --ignore-engines
+        run: yarn install --frozen-lockfile --ignore-engines
 
       - name: Build
         run: yarn build
@@ -27,4 +27,14 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build 
+          publish_dir: ./build
+
+      - name: Wait for deployment
+        run: sleep 30
+
+      - name: Run Lighthouse CI
+        run: npx @lhci/cli autorun --collect.url=https://arnavk09.github.io/todoonglist/
+        continue-on-error: true
+
+      - name: Generate QR code for deployed site
+        run: npx qrcode-terminal https://arnavk09.github.io/todoonglist/
