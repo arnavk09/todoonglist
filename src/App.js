@@ -4,15 +4,15 @@ import ToDoList from "./components/ToDoList";
 import styles from "./App.module.css";
 
 function App() {
-  // Load todos from sessionStorage or start with empty array
+  // Load todos from localStorage or start with empty array
   const [todos, setToDos] = useState(() => {
-    const saved = sessionStorage.getItem("todos");
+    const saved = localStorage.getItem("todos");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Save todos to sessionStorage whenever they change
+  // Save todos to localStorage whenever they change
   useEffect(() => {
-    sessionStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   const addToDo = (text) => {
