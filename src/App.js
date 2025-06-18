@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddToDo from "./components/AddTodo";
 import ToDoList from "./components/ToDoList";
 import styles from "./App.module.css";
 
 function App() {
-  const [todos, setToDos] = useState([]);
+  // Load todos from sessionStorage or start with empty array
+  const [todos, setToDos] = useState(() => {
+    const saved = sessionStorage.getItem("todos");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // Save todos to sessionStorage whenever they change
+  useEffect(() => {
+    sessionStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addToDo = (text) => {
     setToDos([...todos, { id: Date.now(), text, completed: false }]);
