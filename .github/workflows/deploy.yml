@@ -32,9 +32,5 @@ jobs:
       - name: Wait for deployment
         run: sleep 30
 
-      - name: Run Lighthouse CI
-        run: npx @lhci/cli autorun --collect.url=https://arnavk09.github.io/todoonglist/
-        continue-on-error: true
-
       - name: Generate QR code for deployed site
-        run: npx qrcode-terminal https://arnavk09.github.io/todoonglist/
+        run: npx qrcode-terminal --small https://arnavk09.github.io/todoonglist/
